@@ -16,8 +16,11 @@ let productos = {
 let carroDeCompras = [];
 
 function agregarAlCarro() {
-    let producto = prompt('Introduce el producto que deseas agregar:');
-    let cantidad = parseInt(prompt('Introduce la cantidad de productos que deseas agregar:'));
+    let productoInput = document.getElementById('producto');
+    let cantidadInput = document.getElementById('cantidad');
+    
+    let producto = productoInput.value;
+    let cantidad = parseInt(cantidadInput.value);
 
     if (producto && cantidad) {
         let encontrado = false;
@@ -35,6 +38,9 @@ function agregarAlCarro() {
     } else {
         alert('Debe introducir un producto y una cantidad válidos.');
     }
+
+    productoInput.value = '';
+    cantidadInput.value = '';
 }
 
 function calcularPrecioTotal() {
@@ -58,7 +64,8 @@ function vaciarCarro() {
 }
 
 function buscarProducto() {
-    let productoBuscado = prompt('Introduce el nombre del producto que deseas buscar:');
+    let productoBuscadoInput = document.getElementById('productoBuscado');
+    let productoBuscado = productoBuscadoInput.value;
     let encontrado = false;
 
     for (const element of carroDeCompras) {
@@ -72,10 +79,13 @@ function buscarProducto() {
     if (!encontrado) {
         alert(`El producto ${productoBuscado} no se encuentra en el carrito.`);
     }
+
+    productoBuscadoInput.value = '';
 }
 
 function filtrarPorDescuento() {
-    let descuentoMinimo = parseInt(prompt('Introduce el descuento mínimo que deseas filtrar:'));
+    let descuentoMinimoInput = document.getElementById('descuentoMinimo');
+    let descuentoMinimo = parseInt(descuentoMinimoInput.value);
 
     let productosConDescuento = carroDeCompras.filter(element => {
         let descuento = productos[element.producto].descuento;
@@ -90,5 +100,8 @@ function filtrarPorDescuento() {
     } else {
         alert('No hay productos con un descuento igual o mayor al valor introducido.');
     }
+
+    descuentoMinimoInput.value = '';
 }
+
 

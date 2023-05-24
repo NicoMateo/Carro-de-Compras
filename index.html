@@ -3,9 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="./main.js"></script>
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<title>Carrito de Compras</title>
 </head>
 <body>
     <h1>Carrito de Compras</h1>
@@ -15,28 +14,29 @@
         <input type="text" id="producto">
         <label for="cantidad">Cantidad:</label>
         <input type="number" id="cantidad">
-        <button onclick="agregarAlCarro()">Agregar al carrito</button>
+        <button id="agregarAlCarro">Agregar al carrito</button>
     </div>
     <div>
         <h2>Calcular Precio Total</h2>
-        <button onclick="calcularPrecioTotal()">Calcular Precio Total</button>
+        <button id="calcularPrecioTotal">Calcular Precio Total</button>
     </div>
     <div>
         <h2>Buscar Producto</h2>
         <label for="productoBuscado">Producto:</label>
         <input type="text" id="productoBuscado">
-        <button onclick="buscarProducto()">Buscar Producto</button>
+        <button id="buscarProducto">Buscar Producto</button>
     </div>
     <div>
         <h2>Filtrar por Descuento</h2>
         <label for="descuentoMinimo">Descuento mínimo:</label>
         <input type="number" id="descuentoMinimo">
-        <button onclick="filtrarPorDescuento()">Filtrar por Descuento</button>
+        <button id="filtrarPorDescuento">Filtrar por Descuento</button>
     </div>
     <div>
         <h2>Vaciar Carrito</h2>
-        <button onclick="vaciarCarro()">Vaciar Carrito</button>
+        <button id="vaciarCarro">Vaciar Carrito</button>
     </div>
+    <script src="./main.js"></script>
 </body>
 </html>
 
