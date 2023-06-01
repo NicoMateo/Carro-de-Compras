@@ -11,7 +11,7 @@ function crearOpcionesLibros() {
     for (const libro of libros) {
         const option = document.createElement('option');
         option.value = libro.id;
-        option.textContent = `${libro.titulo} - ${libro.autor}`;
+        option.textContent = `${libro.titulo} - ${libro.autor} ($${libro.precio})`; // Mostrar el precio junto al nombre del libro
         librosSelect.appendChild(option);
     }
 }
@@ -72,6 +72,7 @@ function calcularPrecioTotal() {
 }
 
 function vaciarCarro() {
+    carroDeCompras = [];
     alert('El carrito de compras ha sido vaciado.');
 }
 
