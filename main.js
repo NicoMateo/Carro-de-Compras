@@ -42,24 +42,17 @@ function agregarAlCarro() {
             }
 
             const { titulo, autor } = libroSeleccionado;
-            alert(`Se ha agregado ${cantidad} unidades de "${titulo}" de ${autor} al carrito de compras.`);
-
-            calcularPrecioTotal();
+            const mensaje = `Se ha agregado ${cantidad} unidades de "${titulo}" de ${autor} al carrito de compras.`;
+            mostrarMensaje(mensaje);
         } else {
-            alert('El libro seleccionado no existe.');
+            mostrarMensaje('El libro seleccionado no existe.');
         }
     } else {
-        alert('Debe seleccionar un libro y especificar una cantidad válida.');
+        mostrarMensaje('Debe seleccionar un libro y especificar una cantidad válida.');
     }
 
     cantidadInput.value = '';
 }
-
-// Llamamos a la función crearOpcionesLibros() para generar las opciones del select
-crearOpcionesLibros();
-
-// Asignamos el evento click al botón "Agregar al carrito"
-document.getElementById('agregarAlCarro').addEventListener('click', agregarAlCarro);
 
 function calcularPrecioTotal() {
     let total = 0;
@@ -72,12 +65,14 @@ function calcularPrecioTotal() {
             total += precio * cantidad;
         }
     }
-    alert(`El precio total de tu compra es de $${total.toFixed(2)}.`);
+
+    const precioTotalElement = document.getElementById('precioTotal');
+    precioTotalElement.textContent = `El precio total de tu compra es de $${total.toFixed(2)}.`;
 }
 
 function vaciarCarro() {
     carroDeCompras = [];
-    alert('El carrito de compras ha sido vaciado.');
+    mostrarMensaje('El carrito de compras ha sido vaciado.');
 }
 
 function buscarProducto() {
@@ -88,17 +83,28 @@ function buscarProducto() {
     for (const element of carroDeCompras) {
         if (element.producto === productoBuscado) {
             encontrado = true;
-            alert(`El producto ${productoBuscado} se encuentra en el carrito.`);
+            mostrarMensaje(`El producto ${productoBuscado} se encuentra en el carrito.`);
             break;
         }
     }
 
     if (!encontrado) {
-        alert(`El producto ${productoBuscado} no se encuentra en el carrito.`);
+        mostrarMensaje(`El producto ${productoBuscado} no se encuentra en el carrito.`);
     }
 
     productoBuscadoInput.value = '';
 }
+
+function mostrarMensaje(mensaje) {
+    const resultadoElement = document.getElementById('resultadoBusqueda');
+    resultadoElement.textContent = mensaje;
+}
+
+// Llamamos a la función crearOpcionesLibros() para generar las opciones del select
+crearOpcionesLibros();
+
+// Asignamos el evento click al botón "Agregar al carrito"
+document.getElementById('agregarAlCarro').addEventListener('click', agregarAlCarro);
 
 document.getElementById('calcularPrecioTotal').addEventListener('click', calcularPrecioTotal);
 document.getElementById('vaciarCarro').addEventListener('click', vaciarCarro);
