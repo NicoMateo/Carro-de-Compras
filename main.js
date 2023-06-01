@@ -49,9 +49,6 @@ function agregarAlCarro() {
     }
 
     cantidadInput.value = '';
-
-    // Llamamos a la función calcularPrecioTotal() después de agregar un producto al carrito
-    calcularPrecioTotal();
 }
 
 // Llamamos a la función crearOpcionesLibros() para generar las opciones del select
@@ -102,6 +99,3 @@ function buscarProducto() {
 document.getElementById('calcularPrecioTotal').addEventListener('click', calcularPrecioTotal);
 document.getElementById('vaciarCarro').addEventListener('click', vaciarCarro);
 document.getElementById('buscarProducto').addEventListener('click', buscarProducto);
-
-
-
