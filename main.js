@@ -72,7 +72,6 @@ function calcularPrecioTotal() {
 }
 
 function vaciarCarro() {
-    carroDeCompras = [];
     alert('El carrito de compras ha sido vaciado.');
 }
 
