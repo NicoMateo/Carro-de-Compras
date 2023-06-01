@@ -1,54 +1,72 @@
-const productos = {
-    camisa: {
-        precio: 25,
-        descuento: 10
-    },
-    pantalon: {
-        precio: 40,
-        descuento: 20
-    },
-    zapatos: {
-        precio: 50,
-        descuento: 0
-    }
-};
+const libros = [
+    { id: "libro1", titulo: "Título del Libro 1", autor: "Autor del Libro 1", precio: 15 },
+    { id: "libro2", titulo: "Título del Libro 2", autor: "Autor del Libro 2", precio: 10 },
+    { id: "libro3", titulo: "Título del Libro 3", autor: "Autor del Libro 3", precio: 12 },
+    // Agregar más libros 
+];
 
-let carroDeCompras = [];
+function crearOpcionesLibros() {
+    const librosSelect = document.getElementById('libros');
+
+    for (const libro of libros) {
+        const option = document.createElement('option');
+        option.value = libro.id;
+        option.textContent = `${libro.titulo} - ${libro.autor}`;
+        librosSelect.appendChild(option);
+    }
+}
 
 function agregarAlCarro() {
-    const productoInput = document.getElementById('producto');
+    const librosSelect = document.getElementById('libros');
     const cantidadInput = document.getElementById('cantidad');
 
-    const producto = productoInput.value;
+    const libroId = librosSelect.value;
     const cantidad = parseInt(cantidadInput.value);
 
-    if (producto && cantidad) {
-        let encontrado = false;
-        for (const element of carroDeCompras) {
-            if (element.producto === producto) {
-                element.cantidad += cantidad;
-                encontrado = true;
-                break;
+    if (libroId && cantidad) {
+        const libroSeleccionado = libros.find(libro => libro.id === libroId);
+
+        if (libroSeleccionado) {
+            let encontrado = false;
+            for (const element of carroDeCompras) {
+                if (element.producto === libroId) {
+                    element.cantidad += cantidad;
+                    encontrado = true;
+                    break;
+                }
             }
+            if (!encontrado) {
+                carroDeCompras.push({ producto: libroId, cantidad: cantidad });
+            }
+
+            const { titulo, autor } = libroSeleccionado;
+            alert(`Se ha agregado ${cantidad} unidades de "${titulo}" de ${autor} al carrito de compras.`);
+        } else {
+            alert('El libro seleccionado no existe.');
         }
-        if (!encontrado) {
-            carroDeCompras.push({ producto: producto, cantidad: cantidad });
-        }
-        alert(`Se ha agregado ${cantidad} unidades de ${producto} al carrito de compras.`);
     } else {
-        alert('Debe introducir un producto y una cantidad válidos.');
+        alert('Debe seleccionar un libro y especificar una cantidad válida.');
     }
 
-    productoInput.value = '';
     cantidadInput.value = '';
 }
+
+// Llamamos a la función crearOpcionesLibros() para generar las opciones del select
+crearOpcionesLibros();
+
+// Asignamos el evento click al botón "Agregar al carrito"
+document.getElementById('agregarAlCarro').addEventListener('click', agregarAlCarro);
 
 function calcularPrecioTotal() {
     let total = 0;
     for (const element of carroDeCompras) {
         const { producto, cantidad } = element;
-        const { precio, descuento } = productos[producto];
-        total += precio * cantidad * (1 - descuento / 100);
+        const libroSeleccionado = libros.find(libro => libro.id === producto);
+
+        if (libroSeleccionado) {
+            const { precio } = libroSeleccionado;
+            total += precio * cantidad;
+        }
     }
     alert(`El precio total de tu compra es de $${total.toFixed(2)}.`);
 }
@@ -78,32 +96,9 @@ function buscarProducto() {
     productoBuscadoInput.value = '';
 }
 
-function filtrarPorDescuento() {
-    const descuentoMinimoInput = document.getElementById('descuentoMinimo');
-    const descuentoMinimo = parseInt(descuentoMinimoInput.value);
-
-    const productosConDescuento = carroDeCompras.filter(element => {
-        const descuento = productos[element.producto].descuento;
-        return descuento >= descuentoMinimo;
-    });
-
-    if (productosConDescuento.length > 0) {
-        alert('Los siguientes productos tienen un descuento igual o mayor al valor introducido:');
-        for (const element of productosConDescuento) {
-            alert(`- ${element.producto}`);
-        }
-    } else {
-        alert('No hay productos con un descuento igual o mayor al valor introducido.');
-    }
-
-    descuentoMinimoInput.value = '';
-}
-
-
-document.getElementById('agregarAlCarro').addEventListener('click', agregarAlCarro);
 document.getElementById('calcularPrecioTotal').addEventListener('click', calcularPrecioTotal);
 document.getElementById('vaciarCarro').addEventListener('click', vaciarCarro);
 document.getElementById('buscarProducto').addEventListener('click', buscarProducto);
-document.getElementById('filtrarPorDescuento').addEventListener('click', filtrarPorDescuento);
+
 
 
