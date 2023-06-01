@@ -49,6 +49,9 @@ function agregarAlCarro() {
     }
 
     cantidadInput.value = '';
+
+    // Llamamos a la función calcularPrecioTotal() después de agregar un producto al carrito
+    calcularPrecioTotal();
 }
 
 // Llamamos a la función crearOpcionesLibros() para generar las opciones del select
