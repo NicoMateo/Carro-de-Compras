@@ -5,13 +5,15 @@ const libros = [
     // Agregar más libros 
 ];
 
+let carroDeCompras = [];
+
 function crearOpcionesLibros() {
     const librosSelect = document.getElementById('libros');
 
     for (const libro of libros) {
         const option = document.createElement('option');
         option.value = libro.id;
-        option.textContent = `${libro.titulo} - ${libro.autor} ($${libro.precio})`; // Mostrar el precio junto al nombre del libro
+        option.textContent = `${libro.titulo} - ${libro.autor} ($${libro.precio})`;
         librosSelect.appendChild(option);
     }
 }
@@ -41,6 +43,8 @@ function agregarAlCarro() {
 
             const { titulo, autor } = libroSeleccionado;
             alert(`Se ha agregado ${cantidad} unidades de "${titulo}" de ${autor} al carrito de compras.`);
+
+            calcularPrecioTotal();
         } else {
             alert('El libro seleccionado no existe.');
         }
