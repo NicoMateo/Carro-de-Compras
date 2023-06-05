@@ -52,6 +52,9 @@ function agregarAlCarro() {
     }
 
     cantidadInput.value = '';
+
+    // Almacenar el carrito en localStorage
+    localStorage.setItem('carritoDeCompras', JSON.stringify(carroDeCompras));
 }
 
 function calcularPrecioTotal() {
@@ -73,6 +76,9 @@ function calcularPrecioTotal() {
 function vaciarCarro() {
     carroDeCompras = [];
     mostrarMensaje('El carrito de compras ha sido vaciado.');
+
+    // Almacenar el carrito vacío en localStorage
+    localStorage.setItem('carritoDeCompras', JSON.stringify(carroDeCompras));
 }
 
 function buscarProducto() {
@@ -100,6 +106,12 @@ function mostrarMensaje(mensaje) {
     resultadoElement.textContent = mensaje;
 }
 
+// Recuperar el carrito almacenado en localStorage
+const carritoGuardado = localStorage.getItem('carritoDeCompras');
+if (carritoGuardado) {
+    carroDeCompras = JSON.parse(carritoGuardado);
+}
+
 // Llamamos a la función crearOpcionesLibros() para generar las opciones del select
 crearOpcionesLibros();
 
@@ -109,3 +121,6 @@ document.getElementById('agregarAlCarro').addEventListener('click', agregarAlCar
 document.getElementById('calcularPrecioTotal').addEventListener('click', calcularPrecioTotal);
 document.getElementById('vaciarCarro').addEventListener('click', vaciarCarro);
 document.getElementById('buscarProducto').addEventListener('click', buscarProducto);
+
+// Calcular el precio total al cargar la página
+calcularPrecioTotal();
